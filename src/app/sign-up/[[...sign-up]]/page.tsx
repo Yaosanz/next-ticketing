@@ -1,100 +1,31 @@
-'use client'
+"use client"
 
-import * as React from 'react'
-import { useSignUp } from '@clerk/nextjs'
-import { useRouter } from 'next/navigation'
+import { SignUp } from "@clerk/nextjs"
 
-export default function Page() {
-  const { isLoaded, signUp, setActive } = useSignUp()
-  const [verifying, setVerifying] = React.useState(false)
-  const [phone, setPhone] = React.useState('')
-  const [code, setCode] = React.useState('')
-  const router = useRouter()
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-
-    if (!isLoaded && !signUp) return null
-
-    try {
-      // Start the sign-up process using the phone number method
-      await signUp.create({
-        phoneNumber: phone,
-      })
-
-      // Start the verification - a SMS message will be sent to the
-      // number with a one-time code
-      await signUp.preparePhoneNumberVerification()
-
-      // Set verifying to true to display second form and capture the OTP code
-      setVerifying(true)
-    } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      console.error('Error:', JSON.stringify(err, null, 2))
-    }
-  }
-
-  async function handleVerification(e: React.FormEvent) {
-    e.preventDefault()
-
-    if (!isLoaded && !signUp) return null
-
-    try {
-      // Use the code provided by the user and attempt verification
-      const signUpAttempt = await signUp.attemptPhoneNumberVerification({
-        code,
-      })
-
-      // If verification was completed, set the session to active
-      // and redirect the user
-      if (signUpAttempt.status === 'complete') {
-        await setActive({
-          session: signUpAttempt.createdSessionId,
-        })
-
-        // After setting the session active, handle navigation
-        // If you need to check for session tasks, you may need to fetch the session separately
-        await router.push('/')
-      } else {
-        // If the status is not complete, check why. User may need to
-        // complete further steps.
-        console.error(signUpAttempt)
-      }
-    } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      console.error('Error:', JSON.stringify(err, null, 2))
-    }
-  }
-
-  if (verifying) {
-    return (
-      <>
-        <h1>Verify your phone number</h1>
-        <form onSubmit={handleVerification}>
-          <label htmlFor="code">Enter your verification code</label>
-          <input value={code} id="code" name="code" onChange={(e) => setCode(e.target.value)} />
-          <button type="submit">Verify</button>
-        </form>
-      </>
-    )
-  }
-
+export default function SignUpPage() {
   return (
-    <>
-      <h1>Sign up</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="phone">Enter phone number</label>
-        <input
-          value={phone}
-          id="phone"
-          name="phone"
-          type="tel"
-          onChange={(e) => setPhone(e.target.value)}
+    <main className="flex min-h-screen items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg flex flex-col justify-center
+                      max-h-[calc(100vh-4rem)] overflow-y-auto">
+        <h1 className="mb-4 text-center text-3xl font-bold text-gray-800">
+          🎟️ Create your Ticketing Account
+        </h1>
+        <p className="mb-4 text-center text-gray-500">
+          Join us and start managing your events seamlessly
+        </p>
+
+        <SignUp
+          path="/sign-up"
+          routing="path"
+          signInUrl="/sign-in"
+          appearance={{
+            elements: {
+              formButtonPrimary:
+                "bg-indigo-600 hover:bg-indigo-700 text-white text-sm normal-case px-6 py-2 rounded-lg transition",
+            },
+          }}
         />
-        <button type="submit">Continue</button>
-      </form>
-    </>
+      </div>
+    </main>
   )
 }
