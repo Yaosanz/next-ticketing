@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "next-ticketing",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.10.2",
+    "@clerk/clerk-react": "^6.10.2",
     "next": "^15.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -27,7 +28,7 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=18",
+    "node": ">=18.17.0",
     "npm": ">=9"
   }
 }
