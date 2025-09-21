@@ -1,0 +1,66 @@
+# Node.js dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+.next/
+out/
+
+# Static files generated
+*.log
+*.gz
+*.br
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Next.js cache
+.next/cache/
+
+# npm and yarn lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# IDE settings
+.vscode/
+.idea/
+
+# MacOS specific files
+.DS_Store
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
+coverage/
+*.pem
+*.key
+*.crt
+
+# TailwindCSS output (if applicable)
+*.css.map
+tailwind.config.js
+
+# Storybook (if applicable)
+.storybook-out/
+
+# ESLint cache
+.eslintcache
+
+# TypeScript build folder
+dist/
+
+# Temporary files
+tmp/
+temp/
+
+# Ignore local files
+local/
