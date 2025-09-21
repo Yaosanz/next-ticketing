@@ -6,15 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "clean-build": "npx rimraf .next && next build",
     "lint": "next lint"
   },
-  "dependencies": {
-    "@clerk/nextjs": "^6.10.2",
-    "@clerk/clerk-react": "^6.10.2",
-    "next": "^15.5.3",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
+ "dependencies": {
+  "@clerk/nextjs": "^6.10.2",
+  "next": "^15.5.3",
+  "react": "^19.0.0",
+  "react-dom": "^19.0.0"
+}
+,
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/estree": "^1.0.8",
