@@ -56,9 +56,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="flex-1 min-h-[calc(100vh-256px)]">{children}</main>
 
           {/* Footer */}
-          <footer className="py-1 bg-indigo-600 text-center text-gray-50">
+          {/* <footer className="py-1 bg-indigo-600 text-center text-gray-50">
             <p>© 2025 Sandy Budi Wirawan. All rights reserved.</p>
-          </footer>
+          </footer> */}
         </body>
       </html>
     </ClerkProvider>
